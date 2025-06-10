@@ -3,11 +3,11 @@
 class Login extends Controller{
 
   public function index(){
-    echo "my dick got stucked in refrigerator";
+    echo "index function goes on";
   }
 
 
-  public function action(){
-    echo "dumm";
+  public function action($params){
+    echo $params["id"];
   }
 }
