@@ -27,6 +27,16 @@ if(isset($config["global_helpers"])){
   }
 }
 
+if(isset($config["global_libraries"])){
+  foreach ($config["global_libraries"] as $item) {
+    if(!file_exists(APPPATH . "libraries" . DIRECTORY_SEPARATOR . "$item.php")){
+      exit("Could'nt find file ($item.php) you've specified in application/libraries");
+    }
+
+    require_once APPPATH . "libraries" . DIRECTORY_SEPARATOR . "$item.php";
+  }
+}
+
 if(isset($config["core"])){
   foreach ($config["core"] as $item) {
     if(!file_exists(BASEPATH . "core" . DIRECTORY_SEPARATOR . "$item.php")){
@@ -59,10 +69,30 @@ if(file_exists(MODULEPATH . "config" . DIRECTORY_SEPARATOR . "autoload.php")){
 if(isset($config["configs"])){
   foreach ($config["configs"] as $item) {
     if(!file_exists(MODULEPATH . "config" . DIRECTORY_SEPARATOR . "$item.php")){
-      exit("Could'nt find file ($item.php) you've specified in application/configs");
+      exit("Could'nt find file ($item.php) you've specified in {$config["current_module"]}/configs");
     }
 
     require_once MODULEPATH . "config" . DIRECTORY_SEPARATOR . "$item.php";
+  }
+}
+
+if(isset($config["helpers"])){
+  foreach ($config["helpers"] as $item) {
+    if(!file_exists(MODULEPATH . "helpers" . DIRECTORY_SEPARATOR . "$item.php")){
+      exit("Could'nt find file ($item.php) you've specified in {$config["current_module"]}/helpers");
+    }
+
+    require_once MODULEPATH . "helpers" . DIRECTORY_SEPARATOR . "$item.php";
+  }
+}
+
+if(isset($config["libraries"])){
+  foreach ($config["libraries"] as $item) {
+    if(!file_exists(MODULEPATH . "libraries" . DIRECTORY_SEPARATOR . "$item.php")){
+      exit("Could'nt find file ($item.php) you've specified in {$config["current_module"]}/libraries");
+    }
+
+    require_once MODULEPATH . "libraries" . DIRECTORY_SEPARATOR . "$item.php";
   }
 }
 

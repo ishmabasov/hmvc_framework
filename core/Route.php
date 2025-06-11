@@ -81,7 +81,7 @@ class Route{
     ];
   }
 
-  public static function prefix($prefix = NULL, Closure $callback){
+  public static function prefix($prefix, Closure $callback){
     if(!$prefix){
       exit("Wrong usage of prefix");
     }
